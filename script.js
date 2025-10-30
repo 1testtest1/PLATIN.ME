@@ -210,3 +210,37 @@ document.documentElement.style.scrollBehavior = 'smooth';
 // Console branding
 console.log('%cPLATIN AGENCY', 'font-size: 24px; font-weight: bold; color: #fff; text-shadow: 0 0 10px rgba(255,255,255,0.5);');
 console.log('%cЭксклюзивный сервис премиум-класса', 'font-size: 12px; color: #ccc; margin-top: 5px;');
+
+// Prevent widows: склеиваем последние два слова неразрывным пробелом
+function preventWidows(selectors) {
+    const elements = document.querySelectorAll(selectors);
+    elements.forEach(el => {
+        // Пропускаем, если есть вложенные теги со сложной разметкой
+        if (el.children.length > 0 && el.tagName !== 'LI') return;
+        const html = el.innerHTML.trim();
+        if (!html) return;
+        // Если уже есть неразрывный пробел, пропускаем
+        if (html.includes('&nbsp;')) return;
+        // Заменяем последний обычный пробел между словами на неразрывный
+        const updated = html.replace(/\s+(\S+)\s*$/u, '&nbsp;$1');
+        el.innerHTML = updated;
+    });
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+    preventWidows(
+        [
+            '.hero-desc-line1',
+            '.hero-desc-line2',
+            '.foundation-title',
+            '.foundation-text p',
+            '.services-title',
+            '.services-text p',
+            '.process-title',
+            '.confidentiality-title',
+            '.confidentiality-text p',
+            '.footer-cta-title',
+            '.goals-list li'
+        ].join(',')
+    );
+});

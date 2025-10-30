@@ -36,6 +36,23 @@ body {
     overscroll-behavior-y: none;
 }
 
+/* Prevent widows (одиночное слово в последней строке) и улучшить переносы */
+.hero-desc-line1,
+.hero-desc-line2,
+.foundation-title,
+.services-title,
+.process-title,
+.footer-cta-title {
+    text-wrap: balance;
+}
+
+.foundation-text p,
+.services-text p,
+.confidentiality-text p,
+.goals-list li {
+    text-wrap: pretty;
+}
+
 /* Header Styles */
 .header {
     position: fixed;
