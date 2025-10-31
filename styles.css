@@ -36,23 +36,6 @@ body {
     overscroll-behavior-y: none;
 }
 
-/* Prevent widows (одиночное слово в последней строке) и улучшить переносы */
-.hero-desc-line1,
-.hero-desc-line2,
-.foundation-title,
-.services-title,
-.process-title,
-.footer-cta-title {
-    text-wrap: balance;
-}
-
-.foundation-text p,
-.services-text p,
-.confidentiality-text p,
-.goals-list li {
-    text-wrap: pretty;
-}
-
 /* Header Styles */
 .header {
     position: fixed;
@@ -221,6 +204,7 @@ body {
     min-height: 100vh;
     display: flex;
     align-items: center;
+    justify-content: center;
     padding: 0;
     overflow: hidden;
 }
@@ -243,6 +227,7 @@ body {
     min-height: 100vh;            /* как первый блок */
     display: flex;
     align-items: center;
+    justify-content: center;
     padding: 0;                   /* убираем внешние отступы */
 }
 
@@ -255,7 +240,6 @@ body {
     align-items: center;
     justify-content: center;
     gap: 50px;
-    min-height: inherit;          /* центрирование по высоте секции */
     width: 100%;
 }
 
@@ -316,7 +300,6 @@ body {
     justify-content: center;
     align-items: center;
     width: 100%;
-    min-height: 100vh;
 }
 
 .hero-image-container {
@@ -427,7 +410,7 @@ body {
 
 
 .cta-button {
-    padding: 20px 80px;
+    padding: 22px 90px;
     background: #000000;
     border: 2px solid transparent;
     border-radius: 8px;
@@ -435,7 +418,7 @@ body {
     text-decoration: none;
     font-family: 'Inter', sans-serif;
     font-weight: 700;
-    font-size: 16px;
+    font-size: 18px;
     letter-spacing: 2px;
     text-transform: uppercase;
     transition: all 0.3s ease;
@@ -511,7 +494,7 @@ body {
 .foundation {
     position: relative;
     min-height: 100vh;
-    padding: 100px 0;
+    padding: 0 0 100px 0;
     display: flex;
     align-items: center;
     overflow: hidden;
@@ -519,15 +502,15 @@ body {
 
 @media (max-width: 968px) {
     .foundation {
-        padding: 0 0 100px 0;
+        padding: 0 0 50px 0;
     }
     
     .services-process-combined {
-        padding: 0 0 100px 0;
+        padding: 0 0 50px 0;
     }
     
     .services-process-combined .process-container {
-        padding-top: 80px;
+        padding-top: 40px;
     }
 }
 
@@ -574,6 +557,7 @@ body {
     color: var(--text-primary);
     letter-spacing: 0.5px;
     opacity: 1;
+    text-wrap: balance;
 }
 
 .foundation-image-container {
@@ -654,6 +638,7 @@ body {
     color: var(--text-primary);
     letter-spacing: 0.5px;
     opacity: 1;
+    text-wrap: balance;
 }
 
 .services-image-container {
@@ -1020,19 +1005,19 @@ body {
     
     /* Уменьшаем padding для всех секций кроме hero */
     .foundation {
-        padding: 60px 0;
+        padding: 0 0 30px 0;
     }
     
     .services-process-combined {
-        padding: 0 0 60px 0;
+        padding: 0 0 30px 0;
     }
     
     .services-process-combined .process-container {
-        padding-top: 60px;
+        padding-top: 30px;
     }
     
     .services {
-        padding: 60px 0;
+        padding: 0 0 30px 0;
     }
     
     /* Создаем фиксированную навигацию снизу */
@@ -1193,11 +1178,11 @@ body {
 
 @media (max-width: 568px) {
     .header {
-        height: 70px;
+        height: 85px;
     }
     
     .logo-image {
-        height: 48px;
+        height: 65px;
     }
     
     .hero-desc-line1,
@@ -1234,8 +1219,8 @@ body {
     }
     
     .cta-button {
-        padding: 15px 30px;
-        font-size: 14px;
+        padding: 16px 34px;
+        font-size: 15px;
     }
     
     .goals-list li {
@@ -1384,4 +1369,76 @@ body {
 
 .confidentiality-image-wrapper:hover::before {
     opacity: 1;
+}
+
+/* Scroll Animation Styles */
+.scroll-fade-in {
+    opacity: 0;
+    transform: translateY(50px);
+    transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+}
+
+.scroll-fade-in.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Hero content animation */
+.hero-content.scroll-fade-in {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 1s ease-out, transform 1s ease-out;
+}
+
+.hero-content.scroll-fade-in.visible {
+    opacity: 1;
+    transform: translateY(0);
+    transition-delay: 0.2s;
+}
+
+/* Stagger animation delays for different elements */
+.foundation-container.scroll-fade-in.visible {
+    transition-delay: 0.1s;
+}
+
+.foundation-content.scroll-fade-in.visible,
+.foundation-image-container.scroll-fade-in.visible {
+    transition-delay: 0.2s;
+}
+
+.services-container.scroll-fade-in.visible {
+    transition-delay: 0.1s;
+}
+
+.services-content.scroll-fade-in.visible,
+.services-image-container.scroll-fade-in.visible {
+    transition-delay: 0.2s;
+}
+
+.process-container.scroll-fade-in.visible {
+    transition-delay: 0.1s;
+}
+
+.step.scroll-fade-in.visible {
+    transition-delay: calc(var(--step-index, 0) * 0.1s);
+}
+
+.footer-cta-container.scroll-fade-in.visible {
+    transition-delay: 0.1s;
+}
+
+/* Image animations */
+.foundation-image,
+.services-image,
+.confidentiality-image {
+    opacity: 0;
+    transform: translateY(30px) scale(0.95);
+    transition: opacity 1s ease-out, transform 1s ease-out;
+}
+
+.foundation-image-container.visible .foundation-image,
+.services-image-container.visible .services-image,
+.confidentiality-image-container.visible .confidentiality-image {
+    opacity: 1;
+    transform: translateY(0) scale(1);
 }

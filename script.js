@@ -153,7 +153,7 @@ document.head.appendChild(style);
 // Intersection Observer for animations
 const observerOptions = {
     threshold: 0.1,
-    rootMargin: '0px 0px -50px 0px'
+    rootMargin: '0px 0px -100px 0px'
 };
 
 const observer = new IntersectionObserver((entries) => {
@@ -167,6 +167,64 @@ const observer = new IntersectionObserver((entries) => {
 // Observe elements for animation
 document.querySelectorAll('.logo-container, .hero-title, .cta-button').forEach(el => {
     observer.observe(el);
+});
+
+// Scroll fade-in observer for all sections
+const fadeInObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+            // Remove observer after animation to improve performance
+            fadeInObserver.unobserve(entry.target);
+        }
+    });
+}, {
+    threshold: 0.15,
+    rootMargin: '0px 0px -80px 0px'
+});
+
+// Observe all sections and content containers for fade-in animation
+const sectionsToAnimate = [
+    '.hero-content',
+    '.foundation-container',
+    '.foundation-content',
+    '.foundation-image-container',
+    '.services-container',
+    '.services-content',
+    '.services-image-container',
+    '.process-container',
+    '.footer-cta-container'
+];
+
+sectionsToAnimate.forEach(selector => {
+    document.querySelectorAll(selector).forEach(el => {
+        el.classList.add('scroll-fade-in');
+        fadeInObserver.observe(el);
+    });
+});
+
+// Observe steps individually with stagger
+document.querySelectorAll('.step').forEach((step, index) => {
+    step.style.setProperty('--step-index', index);
+    step.classList.add('scroll-fade-in');
+    fadeInObserver.observe(step);
+});
+
+// Observe image containers separately for image animations
+document.querySelectorAll('.foundation-image-container, .services-image-container, .confidentiality-image-container').forEach(el => {
+    const imageObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('visible');
+                imageObserver.unobserve(entry.target);
+            }
+        });
+    }, {
+        threshold: 0.2,
+        rootMargin: '0px 0px -50px 0px'
+    });
+    
+    imageObserver.observe(el);
 });
 
 // Add hover effects to navigation links
@@ -210,37 +268,3 @@ document.documentElement.style.scrollBehavior = 'smooth';
 // Console branding
 console.log('%cPLATIN AGENCY', 'font-size: 24px; font-weight: bold; color: #fff; text-shadow: 0 0 10px rgba(255,255,255,0.5);');
 console.log('%cЭксклюзивный сервис премиум-класса', 'font-size: 12px; color: #ccc; margin-top: 5px;');
-
-// Prevent widows: склеиваем последние два слова неразрывным пробелом
-function preventWidows(selectors) {
-    const elements = document.querySelectorAll(selectors);
-    elements.forEach(el => {
-        // Пропускаем, если есть вложенные теги со сложной разметкой
-        if (el.children.length > 0 && el.tagName !== 'LI') return;
-        const html = el.innerHTML.trim();
-        if (!html) return;
-        // Если уже есть неразрывный пробел, пропускаем
-        if (html.includes('&nbsp;')) return;
-        // Заменяем последний обычный пробел между словами на неразрывный
-        const updated = html.replace(/\s+(\S+)\s*$/u, '&nbsp;$1');
-        el.innerHTML = updated;
-    });
-}
-
-document.addEventListener('DOMContentLoaded', () => {
-    preventWidows(
-        [
-            '.hero-desc-line1',
-            '.hero-desc-line2',
-            '.foundation-title',
-            '.foundation-text p',
-            '.services-title',
-            '.services-text p',
-            '.process-title',
-            '.confidentiality-title',
-            '.confidentiality-text p',
-            '.footer-cta-title',
-            '.goals-list li'
-        ].join(',')
-    );
-});
