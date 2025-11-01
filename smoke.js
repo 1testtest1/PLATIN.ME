@@ -3,12 +3,10 @@
   let points, geometry, material, texture;
   let clusterCenters = [];
 
-  // Определяем мобильное устройство
-  const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) || window.innerWidth <= 768;
-
+  // Используем оптимизированные настройки для всех устройств (как в мобильной версии)
   const params = {
-    particleCount: isMobile ? 200 : 500,         // Количество частиц (меньше на мобильных)
-    baseSize: isMobile ? 80 : 120,               // Базовый размер частиц (меньше на мобильных)
+    particleCount: 200,         // Количество частиц (оптимизировано для всех устройств)
+    baseSize: 80,               // Базовый размер частиц (оптимизировано для всех устройств)
     speed: 0.25,                 // Скорость движения
     maxOpacity: 0.2,           // Максимальная непрозрачность частиц
     globalOpacity: 0.3,         // Общая прозрачность эффекта
@@ -19,9 +17,9 @@
     spreadZ: 17,                // Разброс по Z
     swirlAmp: 0.3,              // Амплитуда вихря
     swirlFreq: 0,             // Частота вихря
-    clusterCount: isMobile ? 4 : 6,            // Количество кластеров (меньше на мобильных)
+    clusterCount: 4,            // Количество кластеров (оптимизировано для всех устройств)
     clusterRadius: 2.8,         // Радиус кластера
-    layerCount: isMobile ? 2 : 3,              // Количество слоёв (меньше на мобильных)
+    layerCount: 2,              // Количество слоёв (оптимизировано для всех устройств)
     layerDepthStep: 3.0,        // Шаг по глубине между слоями
     zoom: 15                    // Зум камеры
   };
@@ -29,10 +27,10 @@
   function init() {
     clock = new THREE.Clock();
 
-    // Для мобильных отключаем антиалиасинг и уменьшаем разрешение
-    const pixelRatio = isMobile ? Math.min(0.75, window.devicePixelRatio) : window.devicePixelRatio;
+    // Оптимизированные настройки для всех устройств
+    const pixelRatio = Math.min(0.75, window.devicePixelRatio);
     renderer = new THREE.WebGLRenderer({ 
-      antialias: !isMobile,  // Отключаем на мобильных
+      antialias: false,  // Отключен для всех устройств для оптимизации
       alpha: true,
       powerPreference: "high-performance"
     });
@@ -343,7 +341,7 @@
   function onWindowResize() {
     camera.aspect = window.innerWidth / window.innerHeight;
     camera.updateProjectionMatrix();
-    const pixelRatio = isMobile ? Math.min(0.75, window.devicePixelRatio) : window.devicePixelRatio;
+    const pixelRatio = Math.min(0.75, window.devicePixelRatio);
     renderer.setPixelRatio(pixelRatio);
     renderer.setSize(window.innerWidth, window.innerHeight);
   }

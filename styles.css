@@ -327,7 +327,7 @@ body {
     text-align: center;
     margin-top: 0;
     height: 100vh;
-    min-height: 100vh;            /* как первый блок */
+    min-height: 100vh;            /* высота экрана */
     display: flex;
     align-items: center;
     justify-content: center;
@@ -347,6 +347,7 @@ body {
     height: 100%;
     min-height: inherit;
     text-align: center;
+    position: relative;
 }
 
 .footer-cta-container .cta-button {
@@ -397,6 +398,25 @@ body {
 
 .footer-cta-logo-text {
     font-size: 48px; /* Базовый размер для em */
+}
+
+/* Строгое центрирование содержимого только на десктопе */
+@media (min-width: 969px) {
+    .footer-cta {
+        height: 100vh;
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    
+    .footer-cta-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        margin: 0 auto;
+    }
 }
 
 @media (max-width: 968px) {
