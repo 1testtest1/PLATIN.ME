@@ -316,3 +316,39 @@ if (document.readyState === 'complete') {
     pageLoaded = true;
     checkPreloaderHide();
 }
+
+// Hide header on footer-cta section in mobile version
+const footerCtaSection = document.querySelector('.footer-cta');
+
+if (footerCtaSection && header) {
+    const footerObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            const isMobile = window.innerWidth <= 568;
+            if (isMobile) {
+                if (entry.isIntersecting) {
+                    // Footer-cta виден - скрываем хедер
+                    header.classList.add('hide-on-footer');
+                } else {
+                    // Footer-cta не виден - показываем хедер
+                    header.classList.remove('hide-on-footer');
+                }
+            } else {
+                // На десктопе всегда показываем хедер
+                header.classList.remove('hide-on-footer');
+            }
+        });
+    }, {
+        threshold: 0.3,
+        rootMargin: '0px'
+    });
+    
+    footerObserver.observe(footerCtaSection);
+    
+    // Также проверяем при изменении размера окна
+    window.addEventListener('resize', () => {
+        const isMobile = window.innerWidth <= 568;
+        if (!isMobile) {
+            header.classList.remove('hide-on-footer');
+        }
+    });
+}
