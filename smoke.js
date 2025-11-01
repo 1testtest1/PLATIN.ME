@@ -7,21 +7,21 @@
   const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) || window.innerWidth <= 768;
   
   const params = {
-    particleCount: isMobile ? 200 : 500,         // Количество частиц (меньше на мобильных)
-    baseSize: isMobile ? 80 : 120,               // Базовый размер частиц (меньше на мобильных)
-    speed: 0.5,                 // Скорость движения
+    particleCount: isMobile ? 100 : 500,         // Количество частиц (еще меньше на мобильных)
+    baseSize: isMobile ? 60 : 120,               // Базовый размер частиц (меньше на мобильных)
+    speed: isMobile ? 0.3 : 0.5,                 // Скорость движения (медленнее на мобильных)
     maxOpacity: 0.2,           // Максимальная непрозрачность частиц
-    globalOpacity: 0.3,         // Общая прозрачность эффекта
+    globalOpacity: isMobile ? 0.2 : 0.3,         // Общая прозрачность эффекта (меньше на мобильных)
     fadeInSec: 2.0,             // Длительность появления (сек)
     fadeOutSec: 2.5,            // Длительность исчезновения (сек)
     lifetimeSec: 12.0,          // Полное время жизни (сек)
     spreadX: 20,                // Разброс по X
     spreadZ: 17,                // Разброс по Z
-    swirlAmp: 0.3,              // Амплитуда вихря
+    swirlAmp: isMobile ? 0.1 : 0.3,              // Амплитуда вихря (меньше на мобильных)
     swirlFreq: 0,             // Частота вихря
-    clusterCount: isMobile ? 4 : 6,            // Количество кластеров (меньше на мобильных)
+    clusterCount: isMobile ? 2 : 6,            // Количество кластеров (еще меньше на мобильных)
     clusterRadius: 2.8,         // Радиус кластера
-    layerCount: isMobile ? 2 : 3,              // Количество слоёв (меньше на мобильных)
+    layerCount: isMobile ? 1 : 3,              // Количество слоёв (один на мобильных)
     layerDepthStep: 3.0,        // Шаг по глубине между слоями
     zoom: 15                    // Зум камеры
   };
@@ -30,7 +30,7 @@
     clock = new THREE.Clock();
 
     // Для мобильных отключаем антиалиасинг и уменьшаем разрешение
-    const pixelRatio = isMobile ? Math.min(0.75, window.devicePixelRatio) : window.devicePixelRatio;
+    const pixelRatio = isMobile ? Math.min(0.5, window.devicePixelRatio) : window.devicePixelRatio;
     renderer = new THREE.WebGLRenderer({ 
       antialias: !isMobile,  // Отключаем на мобильных
       alpha: true,
@@ -332,7 +332,7 @@
   function onWindowResize() {
     camera.aspect = window.innerWidth / window.innerHeight;
     camera.updateProjectionMatrix();
-    const pixelRatio = isMobile ? Math.min(0.75, window.devicePixelRatio) : window.devicePixelRatio;
+    const pixelRatio = isMobile ? Math.min(0.5, window.devicePixelRatio) : window.devicePixelRatio;
     renderer.setPixelRatio(pixelRatio);
     renderer.setSize(window.innerWidth, window.innerHeight);
   }

@@ -1054,6 +1054,20 @@ body {
     
     .hero-container {
         padding: 0 20px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        height: 100%;
+        min-height: inherit;
+    }
+    
+    .hero-content {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
     }
     
     .hero-desc-line1,
@@ -1373,6 +1387,22 @@ body {
 
 .confidentiality-image-wrapper:hover::before {
     opacity: 1;
+}
+
+/* Оптимизация SVG эффектов для мобильных */
+@media (max-width: 768px) {
+    .foundation-image,
+    .services-image {
+        will-change: auto !important;
+        animation: none !important;
+    }
+    
+    img[src$="-test.svg"] {
+        will-change: auto !important;
+        animation: none !important;
+        transform: translateZ(0);
+        backface-visibility: hidden;
+    }
 }
 
 /* Scroll Animation Styles */
