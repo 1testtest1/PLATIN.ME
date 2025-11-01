@@ -3,9 +3,12 @@
   let points, geometry, material, texture;
   let clusterCenters = [];
 
+  // Определяем мобильное устройство
+  const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) || window.innerWidth <= 768;
+  
   const params = {
-    particleCount: 500,         // Количество частиц
-    baseSize: 120,               // Базовый размер частиц (в пикселях)
+    particleCount: isMobile ? 200 : 500,         // Количество частиц (меньше на мобильных)
+    baseSize: isMobile ? 80 : 120,               // Базовый размер частиц (меньше на мобильных)
     speed: 0.5,                 // Скорость движения
     maxOpacity: 0.2,           // Максимальная непрозрачность частиц
     globalOpacity: 0.3,         // Общая прозрачность эффекта
@@ -16,9 +19,9 @@
     spreadZ: 17,                // Разброс по Z
     swirlAmp: 0.3,              // Амплитуда вихря
     swirlFreq: 0,             // Частота вихря
-    clusterCount: 6,            // Количество кластеров
+    clusterCount: isMobile ? 4 : 6,            // Количество кластеров (меньше на мобильных)
     clusterRadius: 2.8,         // Радиус кластера
-    layerCount: 3,              // Количество слоёв
+    layerCount: isMobile ? 2 : 3,              // Количество слоёв (меньше на мобильных)
     layerDepthStep: 3.0,        // Шаг по глубине между слоями
     zoom: 15                    // Зум камеры
   };
@@ -26,7 +29,14 @@
   function init() {
     clock = new THREE.Clock();
 
-    renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+    // Для мобильных отключаем антиалиасинг и уменьшаем разрешение
+    const pixelRatio = isMobile ? Math.min(0.75, window.devicePixelRatio) : window.devicePixelRatio;
+    renderer = new THREE.WebGLRenderer({ 
+      antialias: !isMobile,  // Отключаем на мобильных
+      alpha: true,
+      powerPreference: "high-performance"
+    });
+    renderer.setPixelRatio(pixelRatio);
     renderer.setSize(window.innerWidth, window.innerHeight);
     renderer.sortObjects = false; // один объект — сортировка не нужна
     document.body.appendChild(renderer.domElement);
@@ -322,6 +332,8 @@
   function onWindowResize() {
     camera.aspect = window.innerWidth / window.innerHeight;
     camera.updateProjectionMatrix();
+    const pixelRatio = isMobile ? Math.min(0.75, window.devicePixelRatio) : window.devicePixelRatio;
+    renderer.setPixelRatio(pixelRatio);
     renderer.setSize(window.innerWidth, window.innerHeight);
   }
 

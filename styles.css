@@ -223,7 +223,7 @@ body {
 .footer-cta {
     background-color: transparent;
     text-align: center;
-    margin-top: 40px;
+    margin-top: 0;
     min-height: 100vh;            /* как первый блок */
     display: flex;
     align-items: center;
@@ -241,6 +241,8 @@ body {
     justify-content: center;
     gap: 50px;
     width: 100%;
+    height: 100%;
+    min-height: inherit;
 }
 
 .footer-cta-title {
@@ -300,6 +302,8 @@ body {
     justify-content: center;
     align-items: center;
     width: 100%;
+    height: 100%;
+    min-height: inherit;
 }
 
 .hero-image-container {
