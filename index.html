@@ -10,6 +10,16 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
+    <!-- Preloader -->
+    <div class="preloader" id="preloader">
+        <div class="preloader-content">
+            <div class="preloader-logo">
+                <img src="logomain.svg" alt="PLATIN" class="preloader-logo-img">
+            </div>
+            <div class="preloader-spinner"></div>
+        </div>
+    </div>
+
     <!-- Header -->
     <header class="header" id="header">
         <div class="header-container">
@@ -204,6 +214,8 @@
     <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
     <!-- dat.gui не подключаем, эффект будет работать без панели -->
     <script src="smoke.js"></script>
+    <script src="svg-effects-config.js"></script>
+    <script src="svg-effects.js"></script>
     <script src="script.js"></script>
 </body>
 </html>

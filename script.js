@@ -269,53 +269,50 @@ document.documentElement.style.scrollBehavior = 'smooth';
 console.log('%cPLATIN AGENCY', 'font-size: 24px; font-weight: bold; color: #fff; text-shadow: 0 0 10px rgba(255,255,255,0.5);');
 console.log('%cЭксклюзивный сервис премиум-класса', 'font-size: 12px; color: #ccc; margin-top: 5px;');
 
-// Оптимизация SVG эффектов для мобильных устройств
-(function() {
-    const isMobile = window.innerWidth <= 768;
-    if (isMobile) {
-        // Добавляем CSS для оптимизации SVG на мобильных
-        const style = document.createElement('style');
-        style.textContent = `
-            @media (max-width: 768px) {
-                img[src$=".svg"], img[src*="-test.svg"] {
-                    will-change: auto;
-                    transform: translateZ(0);
-                    backface-visibility: hidden;
-                    animation: none !important;
-                }
-                
-                /* Упрощаем фильтры для SVG изображений */
-                .foundation-image,
-                .services-image {
-                    filter: drop-shadow(0 0 3px rgba(255, 255, 255, 0.5)) !important;
-                    animation: none !important;
-                }
+// Preloader
+let preloaderHidden = false;
+let smokeReady = false;
+let pageLoaded = false;
+
+function hidePreloader() {
+    if (preloaderHidden) return;
+    
+    const preloader = document.getElementById('preloader');
+    if (preloader) {
+        preloaderHidden = true;
+        preloader.classList.add('hidden');
+        // Удаляем элемент из DOM после завершения анимации
+        setTimeout(() => {
+            if (preloader.parentNode) {
+                preloader.parentNode.removeChild(preloader);
             }
-        `;
-        document.head.appendChild(style);
-        
-        // Замедляем/упрощаем анимации SVG через изменение стилей после загрузки
-        const optimizeSVG = () => {
-            const svgImages = document.querySelectorAll('img[src$="-test.svg"]');
-            svgImages.forEach(img => {
-                img.style.willChange = 'auto';
-                img.style.transform = 'translateZ(0)';
-                // Добавляем класс для упрощенных эффектов
-                img.classList.add('svg-optimized');
-            });
-        };
-        
-        // Оптимизируем после загрузки страницы
-        if (document.readyState === 'loading') {
-            document.addEventListener('DOMContentLoaded', optimizeSVG);
-        } else {
-            optimizeSVG();
-        }
-        
-        // Оптимизируем при добавлении новых изображений
-        const observer = new MutationObserver(() => {
-            optimizeSVG();
-        });
-        observer.observe(document.body, { childList: true, subtree: true });
+        }, 500);
     }
-})();
+}
+
+// Функция проверки готовности к скрытию прелоадера
+function checkPreloaderHide() {
+    // Ждем готовности дыма и полной загрузки страницы
+    if (smokeReady && pageLoaded) {
+        // Минимальная задержка для плавного исчезновения и для старта анимации дыма
+        setTimeout(hidePreloader, 500);
+    }
+}
+
+// Слушаем событие готовности дыма
+window.addEventListener('smokeReady', () => {
+    smokeReady = true;
+    checkPreloaderHide();
+});
+
+// Скрываем прелоадер после полной загрузки страницы
+window.addEventListener('load', () => {
+    pageLoaded = true;
+    checkPreloaderHide();
+});
+
+// Также проверяем если страница уже загружена
+if (document.readyState === 'complete') {
+    pageLoaded = true;
+    checkPreloaderHide();
+}

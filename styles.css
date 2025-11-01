@@ -36,6 +36,99 @@ body {
     overscroll-behavior-y: none;
 }
 
+/* Preloader Styles */
+.preloader {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: #000000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 10000;
+    opacity: 1;
+    transition: opacity 0.5s ease-out, visibility 0.5s ease-out;
+    visibility: visible;
+}
+
+.preloader.hidden {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+}
+
+.preloader-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 40px;
+}
+
+.preloader-logo {
+    width: 120px;
+    height: 120px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.preloader-logo-img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.5));
+    animation: preloaderLogoPulse 2s ease-in-out infinite;
+}
+
+@keyframes preloaderLogoPulse {
+    0%, 100% {
+        opacity: 0.6;
+        transform: scale(1);
+    }
+    50% {
+        opacity: 1;
+        transform: scale(1.05);
+    }
+}
+
+.preloader-spinner {
+    width: 50px;
+    height: 50px;
+    border: 3px solid rgba(255, 255, 255, 0.2);
+    border-top: 3px solid rgba(255, 255, 255, 0.9);
+    border-radius: 50%;
+    animation: preloaderSpin 1s linear infinite;
+}
+
+@keyframes preloaderSpin {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+@media (max-width: 568px) {
+    .preloader-logo {
+        width: 100px;
+        height: 100px;
+    }
+    
+    .preloader-content {
+        gap: 30px;
+    }
+    
+    .preloader-spinner {
+        width: 40px;
+        height: 40px;
+        border-width: 2px;
+    }
+}
+
 /* Header Styles */
 .header {
     position: fixed;
@@ -1049,25 +1142,26 @@ body {
     }
     
     .hero {
-        min-height: 75vh;
+        min-height: 100vh;
     }
     
     .hero-container {
         padding: 0 20px;
         display: flex;
-        flex-direction: column;
         justify-content: center;
         align-items: center;
+        width: 100%;
         height: 100%;
         min-height: inherit;
     }
     
     .hero-content {
-        width: 100%;
         display: flex;
         flex-direction: column;
-        align-items: center;
         justify-content: center;
+        align-items: center;
+        width: 100%;
+        max-width: 100%;
     }
     
     .hero-desc-line1,
@@ -1387,22 +1481,6 @@ body {
 
 .confidentiality-image-wrapper:hover::before {
     opacity: 1;
-}
-
-/* Оптимизация SVG эффектов для мобильных */
-@media (max-width: 768px) {
-    .foundation-image,
-    .services-image {
-        will-change: auto !important;
-        animation: none !important;
-    }
-    
-    img[src$="-test.svg"] {
-        will-change: auto !important;
-        animation: none !important;
-        transform: translateZ(0);
-        backface-visibility: hidden;
-    }
 }
 
 /* Scroll Animation Styles */
