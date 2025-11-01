@@ -294,6 +294,7 @@ body {
 /* Hero Section */
 .hero {
     position: relative;
+    height: 100vh;
     min-height: 100vh;
     display: flex;
     align-items: center;
@@ -317,6 +318,7 @@ body {
     background-color: transparent;
     text-align: center;
     margin-top: 0;
+    height: 100vh;
     min-height: 100vh;            /* как первый блок */
     display: flex;
     align-items: center;
@@ -362,15 +364,14 @@ body {
     gap: 30px;
     flex-wrap: wrap;
     width: 100%;
-    max-width: calc(100% - 80px); /* Учитываем паддинги по 40px с каждой стороны */
     text-align: center;
     margin: 0;
     padding: 0;
 }
 
 .footer-cta-logo {
-    width: calc(100vw - 80px); /* Ширина до паддинга контейнера (40px с каждой стороны) */
-    max-width: 1320px; /* max-width контейнера 1400px минус паддинги 80px */
+    width: 100%;
+    max-width: 400px;
     height: auto;
     filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.3));
 }
@@ -392,6 +393,7 @@ body {
 
 @media (max-width: 968px) {
     .footer-cta {
+        height: auto;
         min-height: 75vh;        /* как hero на мобилках */
         padding: 0;
     }
@@ -408,12 +410,11 @@ body {
     
     .footer-cta-logo-text {
         font-size: 36px;
-        max-width: calc(100% - 40px); /* Учитываем паддинги по 20px с каждой стороны */
     }
     
     .footer-cta-logo {
-        width: calc(100vw - 40px); /* Ширина до паддинга (20px с каждой стороны) */
-        max-width: 100%;
+        max-width: 300px;
+        width: 100%;
     }
     
     .footer-cta-text {
@@ -423,6 +424,7 @@ body {
 
 @media (max-width: 568px) {
     .footer-cta {
+        height: auto;
         min-height: 75vh;
         padding: 0;
     }
@@ -443,12 +445,11 @@ body {
     .footer-cta-logo-text {
         font-size: 28px;
         gap: 30px;
-        max-width: calc(100% - 40px); /* Учитываем паддинги по 20px с каждой стороны */
     }
     
     .footer-cta-logo {
-        width: calc(100vw - 40px); /* Ширина до паддинга (20px с каждой стороны) */
-        max-width: 100%;
+        max-width: 250px;
+        width: 100%;
     }
     
     .footer-cta-text {
@@ -518,7 +519,6 @@ body {
     width: 100%;
     max-width: 800px;
     margin: 0 auto;
-    margin-top: -60px;
 }
 
 /* Удалена анимация logoGlow */
@@ -1234,6 +1234,7 @@ body {
     }
     
     .hero {
+        height: auto;
         min-height: 100vh;
     }
     
@@ -1405,6 +1406,10 @@ body {
     
     .hero-description {
         margin-bottom: 40px;
+    }
+    
+    .hero-content {
+        margin-top: -30px;
     }
     
     .foundation-title,
