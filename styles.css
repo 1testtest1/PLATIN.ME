@@ -506,7 +506,7 @@ body {
     }
     
     .footer-cta-text {
-        font-size: 28px;
+        font-size: 24px;
     }
 }
 
@@ -566,7 +566,7 @@ body {
     }
     
     .footer-cta-text {
-        font-size: 22px;
+        font-size: 18px;
     }
     
     /* Скрываем хедер в мобильной версии на последнем блоке - ОТКЛЮЧЕНО */
@@ -1577,7 +1577,7 @@ body {
     }
     
     .footer-cta-text {
-        font-size: 20px;
+        font-size: 16px;
     }
 }
 
