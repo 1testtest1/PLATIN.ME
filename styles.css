@@ -344,8 +344,6 @@ body {
     justify-content: center;
     gap: 30px;
     width: 100%;
-    height: 100%;
-    min-height: inherit;
     text-align: center;
     position: relative;
 }
@@ -372,7 +370,6 @@ body {
     justify-content: center;
     gap: 30px;
     flex-wrap: wrap;
-    width: 100%;
     text-align: center;
     margin: 0;
     padding: 0;
@@ -393,7 +390,8 @@ body {
     color: var(--text-primary);
     letter-spacing: 2px;
     text-align: center;
-    display: inline-block;
+    display: block;
+    margin: 0;
 }
 
 .footer-cta-logo-text {
@@ -403,11 +401,13 @@ body {
 /* Строгое центрирование содержимого только на десктопе */
 @media (min-width: 969px) {
     .footer-cta {
-        height: 100vh;
-        min-height: 100vh;
-        display: flex;
-        align-items: center;
-        justify-content: center;
+        height: 100vh !important;
+        min-height: 100vh !important;
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        padding: 0 !important;
+        margin: 0 !important;
     }
     
     .footer-cta-container {
@@ -415,6 +415,30 @@ body {
         flex-direction: column;
         align-items: center;
         justify-content: center;
+        margin: 0 auto;
+        padding: 4.5rem 40px 0 40px;
+        height: auto;
+        min-height: auto;
+        width: 100%;
+        max-width: 1400px;
+    }
+    
+    .footer-cta-logo-text {
+        width: auto;
+        max-width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 0 auto;
+    }
+    
+    .footer-cta-text {
+        text-align: center;
+        margin: 0 auto;
+        display: block;
+    }
+    
+    .footer-cta-container .cta-button {
         margin: 0 auto;
     }
 }
@@ -424,12 +448,39 @@ body {
         height: auto;
         min-height: 75vh;        /* как hero на мобилках */
         padding: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
     }
     
     .footer-cta-container {
         padding: 0 20px;
         gap: 30px;
         text-align: center;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        margin: 0 auto;
+        width: 100%;
+        max-width: 1400px;
+    }
+    
+    .footer-cta-logo-text {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 0 auto;
+        width: auto;
+    }
+    
+    .footer-cta-text {
+        text-align: center;
+        margin: 0 auto;
+    }
+    
+    .footer-cta-container .cta-button {
+        margin: 0 auto;
     }
     
     .footer-cta-title {
@@ -455,14 +506,38 @@ body {
         height: auto;
         min-height: 75vh;
         padding: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
     }
     
     .footer-cta-container {
         gap: 30px;
         text-align: center;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        margin: 0 auto;
+        width: 100%;
+        max-width: 1400px;
+        padding: 0 20px;
     }
     
     .footer-cta-logo-text {
+        margin: 0 auto;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: auto;
+    }
+    
+    .footer-cta-text {
+        text-align: center;
+        margin: 0 auto;
+    }
+    
+    .footer-cta-container .cta-button {
         margin: 0 auto;
     }
     
@@ -1267,9 +1342,7 @@ body {
     .mobile-bottom-nav .nav-link { display: none; }
     
     /* Убираем дополнительный отступ снизу, так как нижней навигации нет */
-    .footer-cta {
-        padding: 60px 0 60px 0;
-    }
+    /* Стили для footer-cta перенесены в отдельный медиа-запрос выше */
     
     .hero {
         height: auto;
