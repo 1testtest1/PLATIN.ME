@@ -285,6 +285,14 @@ body {
     display: flex;
     align-items: center;
     text-decoration: none;
+    outline: none;
+    -webkit-tap-highlight-color: transparent;
+}
+
+.header-logo a:focus,
+.header-logo a:active,
+.header-logo a:focus-visible {
+    outline: none;
 }
 
 .logo-image {
@@ -292,6 +300,14 @@ body {
     width: auto;
     filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.3));
     transition: all 0.3s ease;
+    outline: none;
+    -webkit-tap-highlight-color: transparent;
+}
+
+.logo-image:focus,
+.logo-image:active,
+.logo-image:focus-visible {
+    outline: none;
 }
 
 .logo-image:hover {
