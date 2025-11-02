@@ -644,6 +644,15 @@ body {
     justify-content: center;
     gap: 12px;
     margin: 0 auto;
+    outline: none;
+    -webkit-tap-highlight-color: transparent;
+}
+
+.cta-button:focus,
+.cta-button:active,
+.cta-button:focus-visible {
+    outline: none;
+    border: 2px solid transparent;
 }
 
 .cta-button::before {
