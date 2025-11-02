@@ -392,6 +392,7 @@ body {
     text-align: center;
     display: block;
     margin: 0;
+    width: 100%;
 }
 
 .footer-cta-logo-text {
@@ -471,12 +472,20 @@ body {
         align-items: center;
         justify-content: center;
         margin: 0 auto;
-        width: auto;
+        width: 100%;
     }
     
     .footer-cta-text {
         text-align: center;
-        margin: 0 auto;
+        margin: 0;
+        width: 100%;
+    }
+    
+    /* Выравнивание текстов по левому краю на мобильных */
+    .foundation-text,
+    .services-text,
+    .step-text {
+        text-align: left;
     }
     
     .footer-cta-container .cta-button {
@@ -497,7 +506,7 @@ body {
     }
     
     .footer-cta-text {
-        font-size: 36px;
+        font-size: 28px;
     }
 }
 
@@ -529,12 +538,13 @@ body {
         display: flex;
         align-items: center;
         justify-content: center;
-        width: auto;
+        width: 100%;
     }
     
     .footer-cta-text {
         text-align: center;
-        margin: 0 auto;
+        margin: 0;
+        width: 100%;
     }
     
     .footer-cta-container .cta-button {
@@ -556,7 +566,7 @@ body {
     }
     
     .footer-cta-text {
-        font-size: 28px;
+        font-size: 22px;
     }
     
     /* Скрываем хедер в мобильной версии на последнем блоке - ОТКЛЮЧЕНО */
@@ -1564,6 +1574,10 @@ body {
     .hero-desc-line1,
     .hero-desc-line2 {
         font-size: 28px;
+    }
+    
+    .footer-cta-text {
+        font-size: 20px;
     }
 }
 
